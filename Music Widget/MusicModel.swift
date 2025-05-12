@@ -10,6 +10,11 @@ import SwiftUI
 import iTunesLibrary
 import Combine
 
+/// Main Model for the Music app
+///
+/// This class is a singleton and provides the interface to the Music app
+/// and the music library. It is responsible for reading the music library,
+/// getting the current track info, and controlling the player.
 class MusicModel: ObservableObject {
     /// Singleton: Instance of this class (constructor must be private)
     static let shared = MusicModel()
