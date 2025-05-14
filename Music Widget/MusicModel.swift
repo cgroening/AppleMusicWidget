@@ -31,12 +31,13 @@ class MusicModel: ObservableObject {
     /// Information about a track (artist, title, etc.)
     @Published var trackInfo = Track()
     
-    /// Indicates whether the song is in the library or retrieved via Apple Music
+    /// Indicates whether the song is in the library or retrieved
+    /// via Apple Music
     @Published var songInLibrary = false
     
     /// Instantiate MusicAppBridge and set up observers
     private init() {
-        // AppleScriptObjC Setup
+        // Load the AppleScript Objective-C scripts
         Bundle.main.loadAppleScriptObjectiveCScripts()
         
         // Create an instance of MusicAppBridge
@@ -49,6 +50,7 @@ class MusicModel: ObservableObject {
     
     /// Saves the artwork to the disk via AppleScript and creates an Image
     /// instance from this file, which is returned.
+    ///
     /// TODO: Choose a different folder than the Downloads folder
     /// TODO: Delete the artwork when the app is closed
     func getArtworkViaAppleScript() -> Image {
@@ -146,6 +148,7 @@ extension MusicModel {
 
 extension MusicModel {
     /// Reads the current status of the Music app
+    ///
     /// - Note: If the Music app is not running, this function calls itself
     /// after one second
     func getMusicState() async {
@@ -160,8 +163,9 @@ extension MusicModel {
         } else {
             Task { @MainActor in
                 // Get the status of the Music app and track info
-                musicState.status = MusicState.PlayerState(rawValue:
-                                                            musicAppBridge._playerState as? Int ?? 0)!
+                musicState.status = MusicState.PlayerState(
+                    rawValue: musicAppBridge._playerState as? Int ?? 0
+                )!
                 musicState.volume = musicAppBridge.soundVolume.doubleValue
                 getTrackInfo()
                 VolumeSliderData.shared.sliderValue = musicState.volume
@@ -192,6 +196,7 @@ extension MusicModel {
     }
     
     /// Updates the track info in case favorite or stars were changed.
+    ///
     /// TODO: Only update favorite and stars, not all data (implement update
     /// function in the Track class)
     func updatedLovedAndRating() {
@@ -207,6 +212,7 @@ extension MusicModel {
     }
     
     /// Returns the cover image (artwork) of the current track
+    ///
     /// - Note: First, it tries to load the cover from the music library.
     /// If none is found (because no cover is stored or the track is played
     /// from Apple Music and not saved in the library), it saves the cover to
@@ -243,8 +249,7 @@ final class VolumeSliderData: ObservableObject {
     var firstUse: Bool = true
     
     let didChange = PassthroughSubject<VolumeSliderData,Never>()
-    @Published var sliderValue: Double =
-    0 {
+    @Published var sliderValue: Double = 0 {
         willSet {
             // Only change the volume on the second use. This ensures that the
             // volume is not set to 0 when the program starts
