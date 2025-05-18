@@ -3,8 +3,7 @@ script MusicAppBridge
     
     # AppleScript will automatically start the program to communicate with
     # (here: com.apple.Music) before sending Apple events.
-    # If this is not desired, you can check beforehand using the running property
-    # to see if the program is running.
+    # If this is not desired it can be checked with the running property.
     to _isRunning() -- () -> NSNumber (Bool)
     return running of application id "com.apple.Music"
 end isRunning
@@ -83,43 +82,24 @@ tell application id "com.apple.Music"
 end tell
 end songRepeat
 
-# Returns a list of playlists marked as favorites
-to favoritedPlaylistsssssss()
-tell application id "com.apple.Music"
-    set playlistDetails to {}
-    repeat with aPlaylist in playlists
-        -- Uncomment the following lines to check for favorited playlists
-        -- try
-        --     set isFav to favorited of aPlaylist
-        -- on error errMsg
-        --     return errMsg
-        -- end try
-        
-        -- if isFav is true then
-        --     set end of playlistDetails to name of aPlaylist
-        -- end if
-    end repeat
-    return "test"
-end tell
-end favoritedPlaylistsssssss
-
+# Returns a list of playlists marked as favorite
 to favoritedPlaylists()
 tell application "System Events"
     tell application "Music"
         set playlistDetails to {}
         repeat with aPlaylist in playlists
             try
-                -- Check if the playlist is favorited
+                # Check if the playlist is favorited
                 if (favorited of aPlaylist) is true then
                     set end of playlistDetails to name of aPlaylist
                 end if
                 on error errMsg
-                -- If there is an error, return it as text
+                # If there is an error, return it as text
                 return "Error: " & errMsg
             end try
         end repeat
         
-        -- If no favorites are found, explicitly return that
+        # If no favorites are found, explicitly return that
         if (count of playlistDetails) = 0 then
             return "No favorites found"
         end if
@@ -130,11 +110,12 @@ end tell
 end favoritedPlaylists
 
 # Test function returning a number
+# TODO: Remove this function in the final version
 to testTest() -- () -> NSNumber (Double, >= 0)
 return 1234
 end testTest
 
-# Cycles through repeat settings: all -> one -> off
+# Cycles through the repeat settings: all -> one -> off
 to toggleSongRepeat()
 tell application id "com.apple.Music"
     if song repeat is off then
@@ -163,14 +144,14 @@ end setSoundVolume:
 
 # Array with the name, artist, and album of the current track
 to trackInfo()  -- () -> [
---        "trackArtist":NSString,
---        "trackAlbum":NSString,
---        "trackName":NSString,
---        "trackNumber":NSNumber,
---        "trackDuration":NSNumber (Double, >= 0),
---        "trackRating":NSNumber (Int, 0...100),
---        "trackLoved":NSNumber,
---       ]?
+#        "trackArtist":NSString,
+#        "trackAlbum":NSString,
+#        "trackName":NSString,
+#        "trackNumber":NSNumber,
+#        "trackDuration":NSNumber (Double, >= 0),
+#        "trackRating":NSNumber (Int, 0...100),
+#        "trackLoved":NSNumber,
+#       ]?
 tell application id "com.apple.Music"
     try
         return {trackArtist:artist, ¬
