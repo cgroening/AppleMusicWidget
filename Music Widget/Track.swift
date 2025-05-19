@@ -7,7 +7,11 @@
 
 import SwiftUI
 
-/// Information about a track (artist, title, etc.)
+/// This struct represents a track in the Music app.
+///
+/// It contains all the information about a track, such as the artist,
+/// album, title, track number, duration, rating, loved status,
+/// date added, date played, play count and cover art.
 struct Track: Equatable {
     var artist: String = ""
     var album: String = ""
@@ -23,8 +27,13 @@ struct Track: Equatable {
     var cover: Image = Image(systemName: "music.quarternote.3")
 }
 
+/// This extension contains the initializer for the Track struct.
+///
+/// It is used to create a Track object from a dictionary
+/// returned by the MusicAppBridge.
 extension Track {
-    /// Initialize struct with values from the MusicAppBridge
+    /// Initializes the struct with values from the MusicAppBridge.
+    ///
     /// - Note: In an extension so the "memberwise initializer" can be used
     /// - Parameter dictionary: Dictionary returned by AppleScript
     init(dictionary: NSDictionary) {
