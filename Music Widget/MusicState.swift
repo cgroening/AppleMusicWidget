@@ -38,11 +38,11 @@ struct MusicState {
     
     /// Enum representing the possible states of the player
     enum PlayerState: Int {
-        case unknown          // The Music app is not running
-        case stopped          // The player is stopped
-        case playing          // The player is playing
-        case paused           // The player is paused
-        case fastForwarding   // The player is fast-forwarding
-        case rewinding        // The player is rewinding
+        case unknown          
+        case stopped
+        case playing
+        case paused
+        case fastForwarding
+        case rewinding
     }
 }

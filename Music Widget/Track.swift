@@ -50,34 +50,46 @@ extension Track {
         if dictionary["trackDuration"] is NSNull {
             self.duration = 0
         } else {
-            self.duration = Int(dictionary.value(forKey: "trackDuration") as! Double)
-            self.durationFormatted = Track.formatSeconds(
-                Int(truncating: dictionary.value(forKey: "trackDuration") as! NSNumber))
+            self.duration = Int(
+                dictionary.value(forKey: "trackDuration") as! Double
+            )
+            self.durationFormatted = Track.formatSeconds(Int(
+                truncating: dictionary.value(forKey: "trackDuration")
+                as! NSNumber
+            ))
         }
         
         self.loved = dictionary.value(forKey: "trackLoved") as! Bool
         
-        // If the song is not in the library, the following values might not be available
+        // If the song is not in the library, the following values
+        // might not be available
         if dictionary["trackDateAdded"] is NSNull {
             self.dateAdded = "n.a."
         } else {
-            self.dateAdded = df.string(from: dictionary.value(forKey: "trackDateAdded") as! Date)
+            self.dateAdded = df.string(
+                from: dictionary.value(forKey: "trackDateAdded") as! Date
+            )
         }
         
         if dictionary["trackDatePlayed"] is NSNull {
             self.datePlayed = "n.a."
         } else {
-            self.datePlayed = df.string(from: dictionary.value(forKey: "trackDatePlayed") as! Date)
+            self.datePlayed = df.string(
+                from: dictionary.value(forKey: "trackDatePlayed") as! Date
+            )
         }
         
         if dictionary["trackPlayCount"] is NSNull {
             self.playCount = "n.a."
         } else {
-            self.playCount = String(dictionary.value(forKey: "trackPlayCount") as! Int)
+            self.playCount = String(dictionary.value(
+                forKey: "trackPlayCount") as! Int
+            )
         }
         
-        // The track's rating is stored in the library as a percentage (0 to 100).
-        // The UI, however, offers 0-5 stars. Therefore, the value is divided by 20 (100/5=20).
+        // The track's rating is stored in the library as a percentage (0-100).
+        // The UI, however, offers 0-5 stars.
+        // Therefore, the value is divided by 20 (e.g. 100/5=20).
         self.rating = (dictionary.value(forKey: "trackRating") as! Int) / 20
     }
 }
@@ -85,6 +97,7 @@ extension Track {
 extension Track {
     /// Converts a value given in seconds into a time-formatted string.
     /// Example: 90 -> "1m 30s"
+    ///
     /// - Parameter duration: NSNumber; track length in seconds
     /// - Returns: Time-formatted string
     static func formatSeconds(_ duration: Int) -> String {
