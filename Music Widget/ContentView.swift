@@ -12,30 +12,35 @@ import AVFAudio
 
 
 struct ContentView: View {
+    /// Height of the window in which the ContentView is displayed.
     let windowHeight: CGFloat = 95
     
-    // Music Model
+    /// Instance of MusicModel (Singleton)
     @EnvironmentObject var musicModel: MusicModel
+    
+    /// Instance of VolumeSliderData (Singleton)
     @EnvironmentObject var volumeSliderData: VolumeSliderData
     
-    
-    // Variables for the Player Position Slider
+    /// The slider value for the Player Position Slider.
     @State var sliderValue: CGFloat = 0
+    
+    /// Indicates Player Position Slider is being dragged/paused.
     @State var timerPaused: Bool = false
+    
+    /// Duration of the song, used to calculate the player position.
     @State var songDuration: CGFloat = 1
     
-    // Timer for the Player Position Slider
+    /// Instance of Timers, used to update the player position slider
     @StateObject private var timers = Timers.shared
-    //    @State private var timers = Timers.shared
     
-    
-    // Indicates whether the Info button is activated
+    /// Indicates whether the info button is activated
     @AppStorage("isInfoButtonActivated") var isInfoButtonActivated: Bool = false
     
-    // Indicates whether Shuffle is enabled
+    /// Indicates whether the shuffle is activated
     @State var shuffleEnabled: Bool = false
     
-    // Setting for song repeat (kRp0, kAll or kRp1)
+    /// Current song repeat setting
+    /// (kRp0 = no repeat, kAll = repeat all songs, kRp1 = repeat current song)
     @State var songRepeat: String = "kRp0"
     
     
