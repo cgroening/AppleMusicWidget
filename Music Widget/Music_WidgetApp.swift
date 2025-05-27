@@ -37,7 +37,7 @@ struct Music_WidgetApp: App {
     
     /// Code to be executed when the app starts
     init() {
-        // Nothing happens here yet
+        // Nothing happens here, yet
     }
     
     /// Display the scene
