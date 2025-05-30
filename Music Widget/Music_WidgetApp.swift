@@ -61,11 +61,14 @@ struct Music_WidgetApp: App {
                     }
                 }
                 .onHover(perform: { hovering in
-                    /// If the window is not active, the buttons cannot be clicked. It requires
-                    /// two clicks: 1. Activate the window, 2. Click the button. To ensure only one click
-                    /// is needed, the following ensures that the window is automatically activated
+                    /// If the window is not active, the buttons cannot be
+                    /// clicked. It requires two clicks:
+                    /// 1. Activate the window
+                    /// 2. Press the button.
+                    /// To ensure only one click is necessary, the following
+                    /// code ensures that the window is automatically activated
                     /// when the mouse pointer moves into it.
-                    
+    
                     if hovering {
                         // Mouse pointer moved into the window:
                         // Save the instance of the app that is currently active
