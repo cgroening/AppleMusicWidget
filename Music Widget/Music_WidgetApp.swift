@@ -72,7 +72,8 @@ struct Music_WidgetApp: App {
                     if hovering {
                         // Mouse pointer moved into the window:
                         // Save the instance of the app that is currently active
-                        self.activeAppBeforeHover = NSWorkspace.shared.frontmostApplication
+                        self.activeAppBeforeHover =
+                            NSWorkspace.shared.frontmostApplication
                         
                         // Activate this app
                         NSApp.activate(ignoringOtherApps: true)
