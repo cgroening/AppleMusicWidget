@@ -86,24 +86,24 @@ struct Music_WidgetApp: App {
                     }
                 })
             
-            // Frame width and height
+                // Frame width and height
                 .frame(minWidth: 365, idealWidth: 365, maxWidth: .infinity,
                        minHeight: 89, idealHeight: 89, maxHeight: 89)
                 .fixedSize()
             
-            // Environment Objects
+                // Environment Objects
                 .environmentObject(musicModel)
                 .environmentObject(volumeSliderData)
             
-            // Toolbar
+                // Toolbar
                 .toolbar {
                     // Toggle for enabling/disabling "Always On Top"
                     ToolbarItem {
                         Toggle(isOn: $alwaysOnTopDisabled) {
-                            Image(systemName:
-                                    alwaysOnTopDisabled ?
-                                  "square.stack.3d.up.slash.fill" :
-                                    "square.stack.3d.up.fill")
+                            Image(systemName: alwaysOnTopDisabled ?
+                                              "square.stack.3d.up.slash.fill" :
+                                              "square.stack.3d.up.fill"
+                            )
                         }
                         .onChange(of: alwaysOnTopDisabled) {
                             oldValue, newValue in
@@ -177,10 +177,10 @@ struct Music_WidgetApp: App {
                     }
                     ToolbarItem {
                         // This slider adjusts the volume while being dragged
-                        // and when released. The additional adjustment on release
-                        // is necessary in case the slider is moved very quickly
-                        // to the left or right. In such cases, the correct volume
-                        // might not be set during dragging.
+                        // and when released. The additional adjustment on
+                        // release is necessary in case the slider is moved
+                        // very quickly to the left or right. In such cases,
+                        // the correct volume might not be set during dragging.
                         Slider(value: $volumeSliderData.sliderValue, in: 0...100,
                                onEditingChanged: { sliderBeingDragged in
                             // Pause the timer while the slider is being dragged
@@ -211,7 +211,8 @@ struct Music_WidgetApp: App {
                                 && self.timerPaused == false
                                 && musicModel.musicState.status == .playing {
                                 // Adjust the slider in the widget
-                                volumeSliderData.sliderValue = Double(truncating: musicAppVol)
+                                volumeSliderData.sliderValue
+                                    = Double(truncating: musicAppVol)
                             }
                         }
                     }
