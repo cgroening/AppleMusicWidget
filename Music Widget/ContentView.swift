@@ -639,12 +639,14 @@ final class Timers: ObservableObject {
     
     /// Starts all timers
     /// Currently the following timers are available:
-    /// first: every 5 seconds, intended for Player Position Slider
-    /// second: every 2 seconds, intended for SlidingText
-    /// A tolerance of 1s is used to reduce CPU usage
+    ///
+    /// - first: every 5 seconds, intended for Player Position Slider
+    /// - second: every 2 seconds, intended for SlidingText
+    ///
+    /// A tolerance of 1 s is used to reduce CPU usage
     /// (the system has the possibility of timer coalescing, the
     /// CPU can remain more in idle,
-    /// see https://www.hackingwithswift.com/books/ios-swiftui/triggering-events-repeatedly-using-a-timer
+    /// see https://www.hackingwithswift.com/books/ios-swiftui/triggering-events-repeatedly-using-a-timer)
     func start() {
         Timer.publish(every: 5, tolerance: 1, on: .main, in: .common)
             .autoconnect()
@@ -664,25 +666,24 @@ final class Timers: ObservableObject {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
+/// Custom Slider for the Player Position Slider
 struct CustomSlider: View {
-    @Binding var value: CGFloat
-    private var minValue: CGFloat
-    private var maxValue: CGFloat
-    
-    private let thumbRadius: CGFloat = 12
-    
+    /// EnvironmentObject for the MusicModel
     @EnvironmentObject var musicModel: MusicModel
     
+    /// The value of the slider which is bound to the MusicModel
+    @Binding var value: CGFloat
+    
+    /// The minimum value of the slider - usually 0
+    private var minValue: CGFloat
+    
+    /// The maximum value of the slider - usually song duration
+    private var maxValue: CGFloat
+    
+    /// Radius of the thumb which is the red circle
+    private let thumbRadius: CGFloat = 12
+    
+
     init(value: Binding<CGFloat>, maxValue: CGFloat) {
         self._value = value
         self.minValue = 0
@@ -690,16 +691,24 @@ struct CustomSlider: View {
     }
     var body: some View {
         GeometryReader{ geometry in
-            ZStack(alignment: .leading){
+            ZStack(alignment: .leading) {
                 // Track
                 Capsule()
                     .foregroundColor(Color.black.opacity(0.3))
                 
                 // Progress
                 Capsule()
-                    .fill(LinearGradient(gradient: .init(colors: [Color.blue, Color.red]),
-                                         startPoint: .leading, endPoint: .trailing))
-                    .frame(width: geometry.size.width * (CGFloat(value) / CGFloat(maxValue)))
+                    .fill(
+                        LinearGradient(
+                            gradient: .init(colors: [Color.blue, Color.red]),
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .frame(
+                        width: geometry.size.width
+                                   * (CGFloat(value) / CGFloat(maxValue))
+                    )
                     .contentShape(.capsule)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .overlay(.white, in: Capsule().stroke(style: .init()))
@@ -727,27 +736,24 @@ struct CustomSlider: View {
                     .fill(Color.red.opacity(0.8))
                     .stroke(Color.black.opacity(0.6), lineWidth: 2)
                     .frame(width: thumbRadius * 2)
-                    .offset(x: geometry.size.width * (CGFloat(value) / CGFloat(maxValue)) - thumbRadius)
+                    .offset(
+                        x: geometry.size.width
+                               * (CGFloat(value) / CGFloat(maxValue))
+                               - thumbRadius
+                    )
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged({ gesture in
                                 updateSliderValue(with: gesture, in: geometry)
                                 
                                 // Only change the player position if the change
-                                // is greater than 5%. This also avoids the jerky
+                                // is greater than 5%. This avoids the jerky
                                 // sound playback when pressing the mouse button
-                                let plPos = musicModel.musicAppBridge.playerPosition
-                                
-                                //if abs(value / Double(truncating: plPos) - 1) > 0.05 {
-                                
-                                print(plPos)
-                                print(value)
-                                print(" ")
+                                let plPos = musicModel.musicAppBridge
+                                                .playerPosition
                                 
                                 musicModel.musicAppBridge.playerPosition =
-                                NSNumber(value: value)
-                                
-                                //}
+                                    NSNumber(value: value)
                             })
                     )
             }
