@@ -756,15 +756,12 @@ struct CustomSlider: View {
     
     
     
-    //--Update slider value when the thumb is dragging
-    private func updateSliderValue(with gesture: DragGesture.Value, in geometry: GeometryProxy) {
+    /// Updates the slider value when the thumb is dragging
+    private func updateSliderValue(
+        with gesture: DragGesture.Value, in geometry: GeometryProxy
+    ) {
         var newValue: CGFloat
-        //        let dragPortion = gesture.location.x / geometry.size.width
-        //        let newValue = Double((maxValue - minValue) * dragPortion) - maxValue
-        //        value = min(max(newValue,minValue),maxValue)
         newValue = (gesture.location.x / geometry.size.width) * maxValue
-        
-        print(newValue)
         
         if newValue < 0 {
             value = 0
