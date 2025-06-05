@@ -44,29 +44,27 @@ struct ContentView: View {
     @State var songRepeat: String = "kRp0"
     
     
-    
-    
-    
-    
     // Test:
     @State private var showPlaylistPicker = false
     @State private var selection = " "
     
     
-    
     var body: some View {
         HStack (alignment: .top, spacing: 0) {
-            // Cover / Buttons on the cover
-            ZStack (alignment: Alignment(horizontal: .trailing, vertical: .top)) {
+            // Cover/Buttons on the cover
+            ZStack (alignment: Alignment(horizontal: .trailing, vertical: .top))
+            {
                 // Cover
                 musicModel.trackInfo.cover
-                    .resizable()
-                    .frame(width: windowHeight, height: windowHeight)
+                .resizable()
+                .frame(width: windowHeight, height: windowHeight)
                 // Darkening the cover from top right to bottom left
                 // https://designcode.io/swiftui-handbook-mask-and-transparency
-                    .mask(LinearGradient(gradient: Gradient(colors:
-                                                                [.black, .black, .black, .clear]),
-                                         startPoint: .bottomLeading, endPoint: .topTrailing))
+                .mask(LinearGradient(gradient: Gradient(
+                    colors: [.black, .black, .black, .clear]),
+                    startPoint: .bottomLeading,
+                    endPoint: .topTrailing
+                ))
                 
                 VStack {
                     HStack {
