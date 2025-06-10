@@ -73,7 +73,10 @@ struct ContentView: View {
                         // Button that shows a checkmark if the track is in the library
                         // or a plus to add the track to the library
                         Button(action: { },
-                               label: { Image(systemName: musicModel.songInLibrary ? "checkmark.circle" : "minus.circle") })
+                               label: { Image(
+                                   systemName: musicModel.songInLibrary
+                                   ? "checkmark.circle" : "minus.circle")
+                        })
                         .help(musicModel.songInLibrary ? "The current title has been added to the library." : "The current title has NOT been added to the library.")
                         .buttonStyle(.borderedProminent)
                         .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
