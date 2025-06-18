@@ -70,8 +70,8 @@ struct ContentView: View {
                     HStack {
                         Spacer()
                         
-                        // Button that shows a checkmark if the track is in the library
-                        // or a plus to add the track to the library
+                        // Button that shows a checkmark if the track is in the
+                        // library or a plus to add the track to the library
                         Button(action: { },
                                label: { Image(
                                    systemName: musicModel.songInLibrary
