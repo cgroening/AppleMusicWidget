@@ -77,7 +77,11 @@ struct ContentView: View {
                                    systemName: musicModel.songInLibrary
                                    ? "checkmark.circle" : "minus.circle")
                         })
-                        .help(musicModel.songInLibrary ? "The current title has been added to the library." : "The current title has NOT been added to the library.")
+                        .help(
+                            musicModel.songInLibrary ?
+                            "The current title has been added to the library." :
+                            "The current title has NOT been added to the library."
+                        )
                         .buttonStyle(.borderedProminent)
                         .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                         .padding(.top, 4)
