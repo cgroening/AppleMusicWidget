@@ -98,7 +98,8 @@ struct ContentView: View {
                                 .font(.system(size: 11))
                                 .padding(.leading, 5)
                                 .help("Date added")
-                            Text(musicModel.trackInfo.dateAdded).font(Font.system(size: 11))
+                            Text(musicModel.trackInfo.dateAdded)
+                                .font(Font.system(size: 11))
                             Spacer()
                         }
                         HStack {
@@ -107,7 +108,8 @@ struct ContentView: View {
                                 .font(.system(size: 11))
                                 .padding(.leading, 5)
                                 .help("Date played")
-                            Text(musicModel.trackInfo.datePlayed).font(Font.system(size: 11))
+                            Text(musicModel.trackInfo.datePlayed)
+                                .font(Font.system(size: 11))
                             Spacer()
                         }
                         HStack {
@@ -116,12 +118,11 @@ struct ContentView: View {
                                 .font(.system(size: 11))
                                 .padding(.leading, 5)
                                 .help("Play count")
-                            Text(musicModel.trackInfo.playCount).font(Font.system(size: 11))
+                            Text(musicModel.trackInfo.playCount)
+                                .font(Font.system(size: 11))
                             Spacer()
                         }
                     }
-                    //.background(Color.white)
-                    //.background(colorScheme == .dark ? Color.black : Color.white)
                     .background(Color(nsColor: NSColor.windowBackgroundColor))
                     .opacity((self.isInfoButtonActivated) ? 0.8 : 0.0)
                     .padding([.bottom], 2)
@@ -142,12 +143,12 @@ struct ContentView: View {
                         .help("Title")
                     Text(musicModel.trackInfo.name).font(Font.system(size: 11))
                         .help(musicModel.trackInfo.name)
-                    // The required timer for SlidingText uses too much energy
-                    //                    GeometryReader(content: { geometry in
-                    //                        SlidingText(geometryProxy: geometry,
-                    //                                    text: musicModel.trackInfo.name,
-                    //                                    fontSize: 11, boldFont: true)
-                    //                    })
+// The required timer for SlidingText uses too much CPU power/energy
+//                    GeometryReader(content: { geometry in
+//                        SlidingText(geometryProxy: geometry,
+//                                    text: musicModel.trackInfo.name,
+//                                    fontSize: 11, boldFont: true)
+//                    })
                     Spacer()
                 }
                 .frame(height: 14)
@@ -158,12 +159,12 @@ struct ContentView: View {
                         .help("Artist")
                     Text(musicModel.trackInfo.artist).font(Font.system(size: 11))
                         .help(musicModel.trackInfo.artist)
-                    // The required timer for SlidingText uses too much energy
-                    //                    GeometryReader(content: { geometry in
-                    //                        SlidingText(geometryProxy: geometry,
-                    //                                    text: musicModel.trackInfo.artist,
-                    //                                    fontSize: 11, boldFont: false)
-                    //                    })
+// The required timer for SlidingText uses too much CPU power/energy
+//                        GeometryReader(content: { geometry in
+//                            SlidingText(geometryProxy: geometry,
+//                                        text: musicModel.trackInfo.artist,
+//                                        fontSize: 11, boldFont: false)
+//                        })
                     Spacer()
                 }
                 .frame(height: 14)
@@ -175,18 +176,19 @@ struct ContentView: View {
                         .help("Album")
                     Text(musicModel.trackInfo.album).font(Font.system(size: 11))
                         .help(musicModel.trackInfo.album)
-                    // The required timer for SlidingText uses too much CPU power/energy
-                    //                    GeometryReader(content: { geometry in
-                    //                        SlidingText(geometryProxy: geometry,
-                    //                                    text: musicModel.trackInfo.album,
-                    //                                    fontSize: 11, boldFont: false)
-                    //                    })
+// The required timer for SlidingText uses too much CPU power/energy
+//                    GeometryReader(content: { geometry in
+//                        SlidingText(geometryProxy: geometry,
+//                                    text: musicModel.trackInfo.album,
+//                                    fontSize: 11, boldFont: false)
+//                    })
                     Spacer()
                 }
                 .frame(height: 14)
                 .padding(.top, -9)
                 
-                // Test: Picker via ZStack, can be removed when Picker is removed.
+                // Test: Picker via ZStack
+                // (ZStack can be removed when Picker is removed)
                 ZStack {
                     HStack (alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/) {
                         ZStack {
