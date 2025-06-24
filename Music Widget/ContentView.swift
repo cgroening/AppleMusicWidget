@@ -250,12 +250,17 @@ struct ContentView: View {
                         },
                                label: { Image(systemName: "shuffle") })
                         .buttonStyle(.plain)
-                        .foregroundStyle((self.shuffleEnabled) ? Color(red: 0, green: 0.5, blue: 0) : .primary)
+                        .foregroundStyle(
+                            (self.shuffleEnabled) ?
+                                Color(red: 0, green: 0.5, blue: 0) : .primary
+                        )
                         .onAppear{
-                            self.shuffleEnabled = self.musicModel.musicAppBridge.shuffleEnabled as! Bool
+                            self.shuffleEnabled = self.musicModel.musicAppBridge
+                                                      .shuffleEnabled as! Bool
                         }
                         .onReceive(timers.$second) { _ in
-                            self.shuffleEnabled = self.musicModel.musicAppBridge.shuffleEnabled as! Bool
+                            self.shuffleEnabled = self.musicModel.musicAppBridge
+                                                      .shuffleEnabled as! Bool
                         }
                         //                    .padding([.top], -15)
                         
@@ -263,7 +268,8 @@ struct ContentView: View {
                         // Repeat-Button
                         Button(action: {
                             self.musicModel.musicAppBridge.toggleSongRepeat()
-                            if self.songRepeat == "kRp0" || self.songRepeat == "kRpO" {
+                            if self.songRepeat == "kRp0"
+                            || self.songRepeat == "kRpO" {
                                 self.songRepeat = "kAll"
                                 print(self.songRepeat)
                             } else if self.songRepeat == "kAll" {
