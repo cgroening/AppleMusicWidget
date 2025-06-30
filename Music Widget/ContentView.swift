@@ -266,21 +266,26 @@ struct ContentView: View {
                         
                         
                         // Repeat-Button
-                        Button(action: {
-                            self.musicModel.musicAppBridge.toggleSongRepeat()
-                            if self.songRepeat == "kRp0"
-                            || self.songRepeat == "kRpO" {
-                                self.songRepeat = "kAll"
-                                print(self.songRepeat)
-                            } else if self.songRepeat == "kAll" {
-                                self.songRepeat = "kRp1"
-                                print(self.songRepeat)
-                            } else {
-                                self.songRepeat = "kRp0"
-                                print(self.songRepeat)
+                        Button(
+                            action: {
+                                self.musicModel.musicAppBridge.toggleSongRepeat()
+                                if self.songRepeat == "kRp0"
+                                || self.songRepeat == "kRpO" {
+                                    self.songRepeat = "kAll"
+                                    print(self.songRepeat)
+                                } else if self.songRepeat == "kAll" {
+                                    self.songRepeat = "kRp1"
+                                    print(self.songRepeat)
+                                } else {
+                                    self.songRepeat = "kRp0"
+                                    print(self.songRepeat)
+                                }
+                            },
+                            label: {
+                                Image(systemName: (self.songRepeat == "kRp1") ?
+                                                  "repeat.1" : "repeat" )
                             }
-                        },
-                               label: { Image(systemName: (self.songRepeat == "kRp1") ? "repeat.1" : "repeat" ) })
+                        )
                         .buttonStyle(.plain)
                         .foregroundStyle((self.songRepeat == "kAll" || self.songRepeat == "kRp1") ? Color(red: 0, green: 0.5, blue: 0) : .primary)
                         .onAppear{
