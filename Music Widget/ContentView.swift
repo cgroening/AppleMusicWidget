@@ -287,12 +287,16 @@ struct ContentView: View {
                             }
                         )
                         .buttonStyle(.plain)
-                        .foregroundStyle((self.songRepeat == "kAll" || self.songRepeat == "kRp1") ? Color(red: 0, green: 0.5, blue: 0) : .primary)
+                        .foregroundStyle(
+                            (self.songRepeat == "kAll" || self.songRepeat == "kRp1") ?
+                            Color(red: 0, green: 0.5, blue: 0) : .primary)
                         .onAppear{
-                            self.songRepeat = self.musicModel.musicAppBridge.songRepeat.stringValue ?? "kRp0"
+                            self.songRepeat = self.musicModel.musicAppBridge
+                                .songRepeat.stringValue ?? "kRp0"
                         }
                         .onReceive(timers.$second) { _ in
-                            self.songRepeat = self.musicModel.musicAppBridge.songRepeat.stringValue ?? "kRp0"
+                            self.songRepeat = self.musicModel.musicAppBridge
+                                .songRepeat.stringValue ?? "kRp0"
                         }
                         //                    .padding([.top], -15)
                         
