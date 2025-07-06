@@ -309,8 +309,10 @@ struct ContentView: View {
                         Button(action: { self.isInfoButtonActivated.toggle() },
                                label: { Image(systemName: "info.circle") })
                         .buttonStyle(.plain)
-                        .foregroundStyle((self.isInfoButtonActivated) ? Color(red: 0, green: 0.5, blue: 0) : .primary)
-                        //                    .padding([.top], -15)
+                        .foregroundStyle(
+                            (self.isInfoButtonActivated) ?
+                            Color(red: 0, green: 0.5, blue: 0) : .primary
+                        )
                         
                         
                         // Playlist-Button
