@@ -343,8 +343,6 @@ struct ContentView: View {
                     .opacity(self.showPlaylistPicker ? 1 : 0)
                 }
                 
-                
-                
                 //                // Slider for Player Position
                 //                Slider(value: $sliderValue, in: 0...((songDuration > 0) ? songDuration : 1), step: 1,
                 //                       onEditingChanged: {
@@ -387,11 +385,14 @@ struct ContentView: View {
                         CustomSlider(value: $sliderValue, maxValue: songDuration)
                             .onReceive(timers.$first) { _ in
                                 if !timerPaused {
-                                    self.sliderValue = Double(musicModel.getPlayerPosition())
+                                    self.sliderValue
+                                        = Double(musicModel.getPlayerPosition())
                                     
-                                    // Song Duration is sometimes 0 when starting the app
-                                    // for unexplained reasons, hence this workaround
-                                    self.songDuration = Double(musicModel.getDuration())
+                                    // Song Duration is sometimes 0 when
+                                    // starting the app for unexplained reasons,
+                                    // hence this workaround
+                                    self.songDuration
+                                        = Double(musicModel.getDuration())
                                     
                                     // Update favorite and star rating, in case
                                     // it was changed in the Music app
@@ -410,7 +411,11 @@ struct ContentView: View {
                             Int(sliderValue) - musicModel.trackInfo.duration)
                         
                         // Workaround for the case when the player is stopped
-                        let progress = String(Int((sliderValue / ((songDuration > 0) ? songDuration : 1)) * 100))
+                        let progress = String(
+                            Int(
+                                (sliderValue / ((songDuration > 0) ? songDuration : 1)) * 100
+                            )
+                        )
                         
                         HStack {
                             Text("\(position) (\(remaining))")
@@ -487,13 +492,6 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-
-
-
-
-
-
-
 /// CustomView for the rating/star buttons. The button flashes when
 /// the current track has not been rated yet and the track progress
 /// is >= 80%.
@@ -512,8 +510,8 @@ struct RatingButton: View {
     // Audio player to play warning sound when title is not yet rated
     @State var audioPlayer: AVAudioPlayer?
     
-    /// Indicates whether the warning for the case that the track is about to end,
-    /// but has not yet been rated, should be disabled
+    /// Indicates whether the warning for the case that the track is about to
+    /// end, but has not yet been rated, should be disabled
     @AppStorage("songNotRatedWarningDisabled")
     var songNotRatedWarningDisabled: Bool = false
     
@@ -527,8 +525,8 @@ struct RatingButton: View {
         })
         .foregroundColor(self.showWarningColor ? .red : .none)
         .onAppear {
-            // Prepare audio player in case a notification sound for missing rating
-            // should be played
+            // Prepare audio player in case a notification sound for missing
+            // rating should be played
             if let audio = NSDataAsset(name: "Audiio_MobilePhoneChime2") {
                 do {
                     audioPlayer = try AVAudioPlayer(data: audio.data)
