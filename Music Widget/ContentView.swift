@@ -598,18 +598,20 @@ struct SlidingText: View {
             .frame(width: geometryProxy.size.width,
                    // The alignment should only be changed if sliding
                    // is necessary
-                   alignment: (animateSliding &&
-                               text.widthOfString(usingFont:
-                                                    NSFont.systemFont(ofSize: fontSize)) >
-                               geometryProxy.size.width) ? .trailing : .leading)
+                   alignment:
+                       (animateSliding && text.widthOfString(usingFont:
+                           NSFont.systemFont(ofSize: fontSize)) >
+                           geometryProxy.size.width
+                       ) ? .trailing : .leading)
             .clipped()
             .animation(Animation.linear(duration: slideDuration),
                        value: self.animateSliding)
             .onReceive(timers.$second) { _ in
                 // Only animate if there is not enough space to display the
                 // complete text
-                let spaceRequired = text.widthOfString(usingFont:
-                                                        NSFont.systemFont(ofSize: fontSize))
+                let spaceRequired = text.widthOfString(
+                    usingFont: NSFont.systemFont(ofSize: fontSize)
+                )
                 let spaceAvailable = geometryProxy.size.width
                 
                 if spaceRequired > spaceAvailable {
